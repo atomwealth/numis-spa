@@ -1,0 +1,9 @@
+<div>
+  <table class="text-xs font-bold underline bg-slate-50">
+    <tr>
+      <td *ngFor="let field of items[0].attributes | keyvalue">
+        {{ field.value }}
+      </td>
+    </tr>
+  </table>
+</div>
