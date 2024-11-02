@@ -6,5 +6,9 @@ export interface Collection {
 
 export interface CollectionItem {
   id: number;
-  attributes: Object;
+  attributes: CollectionAttributes;
+}
+
+export interface CollectionAttributes {
+  [key: string]: number;
 }
