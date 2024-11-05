@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CollectionService } from '../../../../shared/services/collection-service';
 import { CollectionItem } from '../../../../shared/models/collection-model';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { LoadItems } from '../../../../shared/actions/item.actions';
+import { Observable, of } from 'rxjs';
+import { ItemsState } from '../../../../shared/states/items.state';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-collection-main',
@@ -12,22 +15,27 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
   styleUrl: './collection-main.component.scss',
 })
 export class CollectionMainComponent implements OnInit {
-  items: CollectionItem[] = [];
   fields: string[] = [];
   showAdd: boolean = false;
+  items$: Observable<CollectionItem[]> = of([]);
+  loading$: Observable<boolean> = of(false);
 
-  constructor(private _colService: CollectionService) {}
+  constructor(private store: Store) {}
 
   public ngOnInit() {
-    this._colService.getCollection(1).subscribe((data) => {
+    this.items$ = this.store.select(ItemsState.getItems);
+    this.loading$ = this.store.select(ItemsState.isLoading);
+    this.store.dispatch(new LoadItems(1));
+
+    this.items$.subscribe((data) => {
       this.findOutFields(data);
-      this.items = data;
     });
   }
 
   public addCoin() {
     this.showAdd = true;
   }
+
   public closeModal() {
     this.showAdd = false;
   }

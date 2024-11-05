@@ -1,3 +1,4 @@
+<div *ngIf="loading$ | async">LOADING</div>
 <div *ngIf="fields.length > 0" class="container mx-auto px-4 py-8">
   <button
     class="rounded-md shadow py-1 px-2 mb-2 bg-gray-600 text-white uppercase text-sm cursor-pointer"
@@ -12,7 +13,7 @@
       </td>
     </tr>
     <tr
-      *ngFor="let item of items"
+      *ngFor="let item of items$ | async"
       class="hover:bg-gray-50 hover:cursor-pointer"
     >
       <td *ngFor="let field of fields" class="px-6 py-4 text-sm border-2">
