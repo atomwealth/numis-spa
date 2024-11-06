@@ -55,4 +55,7 @@ export class CollectionMainComponent implements OnInit {
     });
     this.fields = fields;
   }
+  deleteItem(itemId: string) {
+    console.log(itemId);
+  }
 }

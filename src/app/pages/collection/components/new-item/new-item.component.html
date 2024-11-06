@@ -35,9 +35,10 @@
     <div>
       <button
         type="submit"
-        class="rounded-md shadow py-1 px-2 my-2 bg-gray-600 text-white uppercase text-sm cursor-pointer"
+        class="rounded-md shadow py-1 px-2 my-2 bg-gray-600 text-white uppercase text-sm cursor-pointer disabled:bg-gray-400"
+        [disabled]="busy"
       >
-        Add coin
+        {{ busy ? "Adding..." : "Add coin" }}
       </button>
     </div>
   </form>

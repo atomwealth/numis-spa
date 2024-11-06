@@ -8,6 +8,7 @@
   </button>
   <table class="overflow-auto rounded-sm">
     <tr class="border-gray-300 bg-gray-600 text-white font-bold">
+      <td></td>
       <td *ngFor="let field of fields" class="px-6 py-4 text-sm">
         {{ field | uppercase }}
       </td>
@@ -16,6 +17,14 @@
       *ngFor="let item of items$ | async"
       class="hover:bg-gray-50 hover:cursor-pointer"
     >
+      <td class="px-2 py-2 text-sm border-2">
+        <button
+          class="rounded-md shadow py-1 px-2 mb-2 bg-gray-600 text-white uppercase text-sm cursor-pointer"
+          (click)="deleteItem(item._id)"
+        >
+          DEL
+        </button>
+      </td>
       <td *ngFor="let field of fields" class="px-6 py-4 text-sm border-2">
         {{ item.attributes[field] }}
       </td>

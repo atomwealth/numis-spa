@@ -6,6 +6,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { CollectionService } from '../../../../shared/services/collection-service';
+import { CollectionItem } from '../../../../shared/models/collection-model';
 
 export interface Field {
   id: string;
@@ -31,8 +33,9 @@ export class NewItemComponent {
     { id: 'price', type: 'number' },
   ];
   form: FormGroup;
+  busy: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private colService: CollectionService) {
     const formFields = this.fields.reduce((acc: any, field: Field) => {
       const name = field.id;
       acc[name] = [''];
@@ -42,6 +45,12 @@ export class NewItemComponent {
   }
 
   submit() {
-    console.log(this.form.value);
+    this.busy = true;
+    const attributes = this.form.value;
+    const item: CollectionItem = { _id: '', attributes };
+    this.colService.addItem(item).subscribe((data) => {
+      console.log(data);
+      this.busy = false;
+    });
   }
 }

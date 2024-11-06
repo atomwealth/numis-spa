@@ -5,7 +5,7 @@ export interface Collection {
 }
 
 export interface CollectionItem {
-  id: number;
+  _id: string;
   attributes: CollectionAttributes;
 }
 
