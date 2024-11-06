@@ -6,11 +6,16 @@ import { LoadItems } from '../../../../shared/actions/item.actions';
 import { Observable, of } from 'rxjs';
 import { ItemsState } from '../../../../shared/states/items.state';
 import { Store } from '@ngxs/store';
+import {
+  StatusState,
+  StatusStateModel,
+} from '../../../../shared/states/status.state';
+import { NewItemComponent } from '../new-item/new-item.component';
 
 @Component({
   selector: 'app-collection-main',
   standalone: true,
-  imports: [CommonModule, ModalComponent],
+  imports: [CommonModule, ModalComponent, NewItemComponent],
   templateUrl: './collection-main.component.html',
   styleUrl: './collection-main.component.scss',
 })
@@ -19,12 +24,14 @@ export class CollectionMainComponent implements OnInit {
   showAdd: boolean = false;
   items$: Observable<CollectionItem[]> = of([]);
   loading$: Observable<boolean> = of(false);
+  status$!: Observable<Date>;
 
   constructor(private store: Store) {}
 
   public ngOnInit() {
     this.items$ = this.store.select(ItemsState.getItems);
     this.loading$ = this.store.select(ItemsState.isLoading);
+    this.status$ = this.store.select(StatusState.getStatus);
     this.store.dispatch(new LoadItems(1));
 
     this.items$.subscribe((data) => {

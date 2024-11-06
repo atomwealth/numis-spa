@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+export interface ModalOptions {
+  headerTitle?: string;
+  footerTitle?: string;
+}
+
 @Component({
   selector: 'app-modal',
   standalone: true,
@@ -10,6 +15,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalComponent {
   @Input() visible = false;
+  @Input() options!: ModalOptions;
   @Output() visibleChange = new EventEmitter<boolean>();
 
   close() {
