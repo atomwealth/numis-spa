@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Collection, CollectionItem } from '../models/collection-model';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { CollectionItem } from '../models/collection-model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 const SERVER_URI = 'http://localhost:3000/api/collection_items';
 
 @Injectable({

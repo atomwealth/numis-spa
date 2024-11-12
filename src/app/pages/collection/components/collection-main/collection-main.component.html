@@ -1,32 +1,42 @@
 <div *ngIf="loading$ | async">LOADING</div>
-<div *ngIf="fields.length > 0" class="container mx-auto px-4 py-8">
-  <button
-    class="rounded-md shadow py-1 px-2 mb-2 bg-gray-600 text-white uppercase text-sm cursor-pointer"
-    (click)="addCoin()"
-  >
-    ADD COIN
+<div
+  *ngIf="fields.length > 0"
+  class="flex flex-col mx-auto px-4 py-8 items-center"
+>
+  <button class="numis-button self-start" (click)="addCoin()">
+    <fa-icon [icon]="faPlus" class="icon-style"></fa-icon> COIN
   </button>
-  <table class="overflow-auto rounded-sm">
-    <tr class="border-gray-300 bg-gray-600 text-white font-bold">
+  <table class="overflow-auto rounded-sm self-start">
+    <tr class="border-teal-300 bg-teal-700 text-white font-bold">
       <td></td>
       <td *ngFor="let field of fields" class="px-6 py-4 text-sm">
         {{ field | uppercase }}
       </td>
+      <td></td>
     </tr>
     <tr
       *ngFor="let item of items$ | async"
-      class="hover:bg-gray-50 hover:cursor-pointer"
+      class="hover:bg-teal-200 hover:cursor-pointer bg-gray-50"
+      (click)="showItemDetail(item)"
     >
       <td class="px-2 py-2 text-sm border-2">
         <button
-          class="rounded-md shadow py-1 px-2 mb-2 bg-gray-600 text-white uppercase text-sm cursor-pointer"
-          (click)="deleteItem(item._id)"
+          class="rounded-md shadow py-1 px-2 mx-1 mb-2 bg-teal-600 text-white uppercase text-sm cursor-pointer"
+          (click)="editItem(item)"
         >
-          DEL
+          <fa-icon [icon]="faEdit" class="icon-style"></fa-icon>
         </button>
       </td>
       <td *ngFor="let field of fields" class="px-6 py-4 text-sm border-2">
         {{ item.attributes[field] }}
+      </td>
+      <td class="px-2 py-2 text-sm border-2">
+        <button
+          class="rounded-md shadow py-1 px-2 mx-1 mb-2 bg-teal-600 text-white uppercase text-sm cursor-pointer"
+          (click)="deleteItem(item._id)"
+        >
+          <fa-icon [icon]="faDelete" class="icon-style"></fa-icon>
+        </button>
       </td>
     </tr>
   </table>
@@ -36,5 +46,5 @@
   [options]="{ headerTitle: 'Add Coin' }"
   (visibleChange)="closeModal()"
 >
-  <app-new-item></app-new-item>
+  <router-outlet></router-outlet>
 </app-modal>

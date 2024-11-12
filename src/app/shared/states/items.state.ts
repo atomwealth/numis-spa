@@ -30,6 +30,13 @@ export class ItemsState {
     return state.loading;
   }
 
+  @Selector()
+  static getItemById(state: ItemStateModel) {
+    return (itemId: string) => {
+      return state.items.find((item) => item._id === itemId);
+    };
+  }
+
   @Action(LoadItems)
   loadItems(ctx: StateContext<ItemStateModel>) {
     ctx.patchState({ loading: true });

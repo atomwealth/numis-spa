@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollectionComponent } from './collection.component';
+import { CollectionComponent } from './collection.page';
 
 describe('CollectionComponent', () => {
   let component: CollectionComponent;
@@ -8,10 +8,9 @@ describe('CollectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CollectionComponent]
-    })
-    .compileComponents();
-    
+      imports: [CollectionComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CollectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

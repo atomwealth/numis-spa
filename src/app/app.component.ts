@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgxsModule } from '@ngxs/store';
-import { ItemsState } from './shared/states/items.state';
 import { StatusService } from './shared/services/status-service';
 
 @Component({
